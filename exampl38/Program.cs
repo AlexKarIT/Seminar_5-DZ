@@ -17,10 +17,18 @@ int Y = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите максимальное значение элементов массива: " + Y + "...X");
 int X = Convert.ToInt32(Console.ReadLine());
 
-int[] array1 = new int[N];
+Console.WriteLine("Введите максимальное число разрядов после запятой: ");
+int Q = Convert.ToInt32(Console.ReadLine());
+
+double[] array1 = new double[N];
+
 for (int i = 0; i < N; i++)
 {
-    array1[i] = new Random().Next(Y, X);
+    double rand1 = new Random().Next(Y, X);     //Генерация целой части  
+    int St = Convert.ToInt32(Math.Pow(10, Q));
+    double rand2 = new Random().Next(0, St);     //Генерация дробной части
+
+    array1[i] = Math.Round(rand1+Math.Abs(rand2/Math.Pow(10, Q)), 3);
 }
 
 
@@ -30,9 +38,9 @@ Console.WriteLine();
 Console.WriteLine("Полученный массив: ");
 Console.WriteLine(string.Join(", ", array1));
 
-//Поиск разницу между максимальным и минимальным элементов массива
-int Min = X + 1;
-int Max = Y - 1;
+//Поиск разницы между максимальным и минимальным элементов массива
+double Min = X + 1;
+double Max = Y - 1;
 
 for (int i = 0; i < N; i++)
 {
@@ -40,7 +48,7 @@ for (int i = 0; i < N; i++)
     if (array1[i] < Min) Min = array1[i];
 }
 
-int result = Max - Min;
+double result = Math.Round(Max - Min, 3);
 
 Console.WriteLine();
 Console.Write("Разница между максимальным и минимальным элементами массива: ");
